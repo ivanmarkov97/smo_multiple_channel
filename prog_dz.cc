@@ -65,7 +65,7 @@ void find_serv_queue(double tc, double ts){
 				printf("%lf\n", p0);
 				//getchar();
 			}
-			printf("p0 == %lf pn+m == %lf n == %d m == %d\n", p0, pnm, n, m);
+			//printf("p0 == %lf pn+m == %lf n == %d m == %d\n", p0, pnm, n, m);
 			//getchar();
 			K[n][m] = a * (1.0 - pnm); //pQ
 			L[n][m] = p0 * (pow(a, n + 1) / (n * fact(n))) * ( 1.0 - pow(a / n, m) * (m + 1.0 - m / n * a)) / pow(1.0 - a / n, 2.0);
@@ -73,14 +73,26 @@ void find_serv_queue(double tc, double ts){
 		}
 	}
 
+	double del = fabs(K[1][0] - L[1][0]);
+	int ind = 1, jnd = 0;
+
 	for(int i = 1; i < n; i++){
 		for(int j = 0; j < m; j++){
-			if(fabs(K[i][j] - L[i][j]) < eps){
-				printf("K = %lf L = %lf n = %d  m = %d\n", K[i][j], L[i][j], i, j);
+
+			printf("%lf %lf %d %d\n", K[i][j], L[i][j], i, j);
+			getchar();
+
+			if(fabs(K[i][j] - L[i][j]) < del /*eps*/){
+				del = fabs(K[i][j] - L[i][j]);
+				ind = i;
+				jnd = j;
+				//printf("K = %lf L = %lf n = %d  m = %d\n", K[i][j], L[i][j], i, j);
 			}
 		}
-		putchar('\n');
+		//putchar('\n');
 	}
+
+	printf("3 is === %d %d %lf\n", ind, jnd, del);
 
 	printf("%lf %lf\n", K[3][4], L[3][4]);
 }
@@ -126,7 +138,7 @@ void plot_len_time(double tc, double ts, int n, FILE* f1, FILE* f2){
 	double L = 0.0;
 	double T = 0.0;
 
-	for(int i = 6; i <= n; i++){
+	for(int i = 7; i <= n; i++){
 		for(int k = 0; k <= i; k++){
 			sum += pow(a, k) / fact(k);
 		}
@@ -186,7 +198,7 @@ void task_exit(double tc, double ts, double tw, int n, FILE* k, FILE* l, FILE* t
 	printf("start m = 1 %.10lf\n", calc_p0_5(tc, ts, tw, 12, 15));
 	printf("start m = 2 %.10lf\n", calc_p0_5(tc, ts, tw, n, 2));
 
-	for(int i = 6; i <= n; i++){
+	for(int i = 7; i <= n; i++){
 		while(fabs(calc_p0_5(tc, ts, tw, i, m) - calc_p0_5(tc, ts, tw, i, m + 1) > eps)){
 			m++;	
 			p0 = calc_p0_5(tc, ts, tw, i, m);
@@ -211,10 +223,11 @@ void task_exit(double tc, double ts, double tw, int n, FILE* k, FILE* l, FILE* t
 
 
 void task_2(){
-	double tc = 372.0;
-	double ts = 12.0;
+	//396 11 45
+	double tc = 396.0;
+	double ts = 11.0;
 	double a = ts / tc;
-	int N = 41;
+	int N = 45;
 	int m;
 	double p0 = 0.0;
 	double sum = 0.0;
@@ -331,20 +344,20 @@ int main(int argc, char* argv[]){
 
 	assert(tc > 0 && ts > 0 && tw > 0 && "args must be positive\n");
 
-	//num_oper = operators_num(tc, ts, 0.01, file_oper_refuse);
+	num_oper = operators_num(tc, ts, 0.01, file_oper_refuse);
 
-	//printf("%d\n", num_oper);
+	printf("%d\n", num_oper);
 
-	//plot_load(tc, ts, num_oper, file_load_koef);
-	//plot_reverse(tc, ts, num_oper, file_reverse, file_load_koef2);
+	plot_load(tc, ts, num_oper, file_load_koef);
+	plot_reverse(tc, ts, num_oper, file_reverse, file_load_koef2);
 
-	//find_serv_queue(tc, ts);
+	find_serv_queue(tc, ts);
 
-	//plot_len_time(tc, ts, num_oper, file_len_queue, file_time_queue);
+	plot_len_time(tc, ts, num_oper, file_len_queue, file_time_queue);
 
-	//printf("%lf\n", fact_rev(12, 12));
+	printf("%lf\n", fact_rev(12, 12));
 
-	//task_exit(tc, ts, tw, num_oper, file_load_koef5, file_len_queue5, file_time_queue5);
+	task_exit(tc, ts, tw, num_oper, file_load_koef5, file_len_queue5, file_time_queue5);
 
 	task_2();
 
@@ -352,26 +365,3 @@ int main(int argc, char* argv[]){
 	fclose(file_load_koef);
 	return 0;
 }
-
-
-/*
-
-Задача №1. Проектирование Call-центра.
-
-Известно, что среднее время между звонками клиентов составляет Tc секунд, а среднее время обслуживания Ts секунд. Все потоки случайных событий считать пуассоновскими. Если все операторы заняты, звонок теряется.
-
-1. Рассчитать минимальное число операторов, при котором доля отказов не превышает 25%, 10%, 5%, 1%. Построить график вероятности отказа от числа операторов. Построить график, иллюстрирующий коэффициент загрузки операторов в зависимости от их числа.
-
-2. Построить график изменения доли отказов при замене каналов обслуживания местами в очереди (начиная с числа операторов, соответствующего 1% отказов в системе без очереди). Построить график, иллюстрирующий коэффициент загрузки операторов. Построить график математического ожидания длины очереди. Построить график, иллюстрирующий коэффициент занятости мест в очереди. Построить график математического ожидания времени пребывания клиентов в очереди.
-
-3. Рассмотреть систему с ограниченной очередью. Подобрать такие параметры системы (число каналов обслуживания и число мест в очереди) чтобы коэффициенты загрузки операторов и занятости мест в очереди были максимально близки друг к другу.
-
-4. Рассмотреть систему без ограничений на длину очереди. Построить график математического ожидания длины очереди в зависимости от числа операторов (вплоть до числа каналов, соответствующего 1% отказов в системе без очереди). Построить график, иллюстрирующий коэффициент загрузки операторов. Построить график математического ожидания времени пребывания клиентов в очереди.
-
-5. Рассмотреть систему без ограничений на длину очереди, учитывающей фактор ухода клиентов из очереди (среднее приемлемое время ожидания – Tw секунд). Построить график средней длины очереди в зависимости от числа операторов (вплоть до числа каналов, соответствующего 1% отказов в системе без очереди). Построить график, иллюстрирующий коэффициент загрузки операторов. Построить график математического ожидания времени пребывания клиентов в очереди.
-
-Задача №2. Проектирование производственного участка.
-
-Имеется участок с N станками. Среднее время между наладками составляет Tc минут, среднее время наладки – Ts минут. Все потоки случайных событий считать пуассоновскими. Построить график зависимости числа простаивающих станков от числа наладчиков. Построить график зависимости коэффициента занятости наладчиков от их числа.
-
-*/
