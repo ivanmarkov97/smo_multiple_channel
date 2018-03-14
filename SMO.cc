@@ -35,7 +35,7 @@ void SMO :: plot_load(int n, FILE* k){
 	}
 }
 
-void SMO :: plot_len_time_work(int n, FILE* p, FILE* f0, FILE* f1, FILE* f2, FILE* f3){
+/*void SMO :: plot_len_time_work(int n, FILE* p, FILE* f0, FILE* f1, FILE* f2, FILE* f3){
 	double p0 = 0.0;
 	double pnm = 1.0;
 	double pn = 1.0;
@@ -60,7 +60,7 @@ void SMO :: plot_len_time_work(int n, FILE* p, FILE* f0, FILE* f1, FILE* f2, FIL
 		double L = ((pow(a, i + 1)*p0) / (i*fact(i))*((1.0 - pow(a / i, m)*(m + 1.0 - m*a / i)) / pow(1.0 - a / i, 2)));
 		double T = L * tc;
 
-		printf("LTW %d %.10lf\n", i, pnm);
+		/*printf("LTW %d %.10lf\n", i, pnm);
 		printf("LTW %d %.10lf\n", i, K);
 		printf("LTW %d %.10lf\n", i, Len);
 		printf("LTW %d %.10lf\n", i, L);
@@ -70,13 +70,13 @@ void SMO :: plot_len_time_work(int n, FILE* p, FILE* f0, FILE* f1, FILE* f2, FIL
 
 		fprintf(p, "%d %.10lf\n", i, pnm);
 		fprintf(f0, "%d %.10lf\n", i, K);
-		if(i >= 7){
+		if(i >= a + 1){
 		fprintf(f1, "%d %.10lf\n", i, Len);
 		fprintf(f2, "%d %.10lf\n", i, L/i);
 		fprintf(f3, "%d %.10lf\n", i, T);
 		}
 	}	
-}
+}*/
 
 void SMO :: task_2(FILE* f1, FILE* f2){
 	//396 11 45

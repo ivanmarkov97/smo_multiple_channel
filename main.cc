@@ -55,7 +55,7 @@ int main(int argc, char* argv[]){
 
 	int num = smo->num_oper(0.01, files[0]);
 	smo->plot_load(num, files[1]);
-	smo->plot_len_time_work(num, files[2], files[3], files[4], files[5], files[6]);
+	smo_lim->plot_len_time_work(num, files[2], files[3], files[4], files[5], files[6]);
 	smo_lim->find_serv_queue();
 	smo_unlim->plot_len_time(num, files[7], files[8], files[9]);
 	smo_unlim->task_exit(num, files[10], files[11], files[12]);

@@ -22,7 +22,7 @@ public:
 	
 	int num_oper(double, FILE*);
 	void plot_load(int, FILE*);
-	void plot_len_time_work(int a, FILE* f0, FILE* f1, FILE* f2, FILE* f3, FILE* f4);
+	//void plot_len_time_work(int a, FILE* f0, FILE* f1, FILE* f2, FILE* f3, FILE* f4);
 	void task_2(FILE*, FILE*);
 	double fact(int n){
 		double ret = 1.0;
