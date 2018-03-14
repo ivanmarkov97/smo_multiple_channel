@@ -8,7 +8,7 @@ void SMO_LIMITED :: find_serv_queue(){
 	double pnm = 1.0;
 	double sum = 0.0;
 	double eps = 1.0e-3;
-	int max = 12;
+	int max = 14;
 
 	double L[max][max] = {0.0};
 	double K[max][max] = {0.0};
