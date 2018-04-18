@@ -17,7 +17,7 @@ protected:
 public:
 	SMO(double _tc = 0.0,
 		double _ts = 0.0, 
-		double _tw = 0.0): tc(_tc), ts(_ts), tw(_tw), a(_ts / _tc), b(_ts / _tw) {};
+		double _tw = 0.0): tc(_tc), ts(_ts), tw(_tw), a(_ts / _tc), b(_ts / _tw) {printf("a == %lf\n", a);};
 	~SMO();
 	
 	int num_oper(double, FILE*);

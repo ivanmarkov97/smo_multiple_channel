@@ -9,6 +9,7 @@ void SMO_UNLIMITED :: plot_len_time(int n, FILE* f0, FILE* f1, FILE* f2){
 	double L = 0.0;
 	double T = 0.0;
 
+
 	for(int i = a + 1; i <= n; i++){
 		for(int k = 0; k <= i; k++){
 			sum += pow(a, k) / fact(k);
@@ -17,7 +18,7 @@ void SMO_UNLIMITED :: plot_len_time(int n, FILE* f0, FILE* f1, FILE* f2){
 		p0 = 1.0 / sum;
 		sum = 0.0;
 
-		printf("p0 == %.10lf\n" , p0);
+		//printf("p0 == %.10lf\n" , p0);
 
 		fprintf(f0, "%d %lf\n", i, a / i);
 
@@ -30,10 +31,10 @@ void SMO_UNLIMITED :: plot_len_time(int n, FILE* f0, FILE* f1, FILE* f2){
 		T = (L) * tc; 
 
 		fprintf(f2, "%d %lf\n", i, T);
-		printf("%d %lf\n", i, L);
-		printf("%d %lf\n", i, T);
+		//printf("%d %lf\n", i, L);
+		//printf("%d %lf\n", i, T);
 
-		getchar();
+		//getchar();
 	}
 }
 
@@ -88,13 +89,13 @@ void SMO_UNLIMITED :: task_exit(int n, FILE* k, FILE* l, FILE* t){
 		}
 
 		L *= prefix;
-		printf("L == %.10lf\n", L);
+		//printf("L == %.10lf\n", L);
 
 		K = a * (1.0 - pnm) / i ;/// i;
 		//L = ((pow(a, i + 1)*p0) / (i*fact(i))*((1.0 - pow(a / i, m)*(m + 1.0 - m*a / i)) / pow(1.0 - a / i, 2)));
 		T = (L) * tc; 
 
-		printf("T == %.10lf\n", T);
+		//printf("T == %.10lf\n", T);
 
 		fprintf(k, "%d %lf\n",i, K);
 		fprintf(l, "%d %lf\n",i, L);
@@ -103,7 +104,7 @@ void SMO_UNLIMITED :: task_exit(int n, FILE* k, FILE* l, FILE* t){
 		znam = 1.0;
 		L = 0.0;
 
-		getchar();
+		//getchar();
 		m = 1;
 	}
 }

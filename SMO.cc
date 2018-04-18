@@ -80,10 +80,10 @@ void SMO :: plot_load(int n, FILE* k){
 
 void SMO :: task_2(FILE* f1, FILE* f2){
 	//396 11 45
-	tc = 396.0;
-	ts = 11.0;
+	tc = 279.0;
+	ts = 9.0;
 	a = ts / tc;
-	int N = 45;
+	int N = 38;
 	int m;
 	double p0 = 0.0;
 	double sum = 0.0;

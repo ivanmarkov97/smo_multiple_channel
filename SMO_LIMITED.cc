@@ -32,16 +32,15 @@ void SMO_LIMITED :: plot_len_time_work(int n, FILE* p, FILE* f0, FILE* f1, FILE*
 		printf("LTW %d %.10lf\n", i, Len);
 		printf("LTW %d %.10lf\n", i, L);
 		printf("LTW %d %.10lf\n", i, T);
-
-		getchar();*/
+		*/
 
 		fprintf(p, "%d %.10lf\n", i, pnm);
 		fprintf(f0, "%d %.10lf\n", i, K);
-		if(i >= a + 1){
+		printf("%d\n", i);
+		getchar();
 		fprintf(f1, "%d %.10lf\n", i, Len);
 		fprintf(f2, "%d %.10lf\n", i, L/i);
 		fprintf(f3, "%d %.10lf\n", i, T);
-		}
 	}	
 }
 
